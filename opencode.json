@@ -1,8 +1,12 @@
 {
+  "author": "Andi UPN (https://github.com/andiupn)",
+  "website": "https://kuncimu.com",
+  "license": "MIT",
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "code",
-  "instructions": ["AGENTS.md"],
-
+  "instructions": [
+    "AGENTS.md"
+  ],
   "agent": {
     "code": {
       "description": "Primary agent for writing, editing, and running code across any language",
@@ -18,7 +22,13 @@
       "color": "#4A90D9",
       "permission": {
         "edit": "deny",
-        "bash": { "*": "ask", "git *": "allow", "grep *": "allow", "find *": "allow", "ls *": "allow" },
+        "bash": {
+          "*": "ask",
+          "git *": "allow",
+          "grep *": "allow",
+          "find *": "allow",
+          "ls *": "allow"
+        },
         "read": "allow",
         "glob": "allow",
         "grep": "allow"
@@ -31,7 +41,17 @@
       "color": "#E74C3C",
       "permission": {
         "edit": "deny",
-        "bash": { "*": "ask", "git *": "allow", "npm *": "allow", "bun *": "allow", "pip *": "allow", "python *": "allow", "cargo *": "allow", "go *": "allow", "ls *": "allow" },
+        "bash": {
+          "*": "ask",
+          "git *": "allow",
+          "npm *": "allow",
+          "bun *": "allow",
+          "pip *": "allow",
+          "python *": "allow",
+          "cargo *": "allow",
+          "go *": "allow",
+          "ls *": "allow"
+        },
         "read": "allow",
         "glob": "allow",
         "grep": "allow"
@@ -44,7 +64,12 @@
       "color": "#2ECC71",
       "permission": {
         "edit": "allow",
-        "bash": { "*": "ask", "git diff*": "allow", "git status*": "allow", "ls *": "allow" },
+        "bash": {
+          "*": "ask",
+          "git diff*": "allow",
+          "git status*": "allow",
+          "ls *": "allow"
+        },
         "read": "allow",
         "glob": "allow",
         "grep": "allow"
@@ -65,7 +90,6 @@
       }
     }
   },
-
   "command": {
     "analyze": {
       "description": "Analyze project structure and provide a summary",
@@ -86,19 +110,27 @@
       "subtask": true
     }
   },
-
   "permission": {
-    "read": { "*": "allow", ".env": "deny", ".env.*": "deny", ".env.example": "allow" },
-    "bash": { "*": "ask", "git *": "allow", "ls *": "allow" }
+    "read": {
+      "*": "allow",
+      ".env": "deny",
+      ".env.*": "deny",
+      ".env.example": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "ls *": "allow"
+    }
   },
-
-  "tool_output": { "max_lines": 500, "max_bytes": 102400 },
-
+  "tool_output": {
+    "max_lines": 500,
+    "max_bytes": 102400
+  },
   "compaction": {
     "auto": true,
     "tail_turns": 3
   },
-
   "experimental": {
     "continue_loop_on_deny": true
   }
