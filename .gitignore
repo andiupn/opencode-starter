@@ -1,0 +1,24 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Runtime databases & caches
+*.db
+*.sqlite
+*.sqlite3
+.opencode/memory/backup/
+.opencode/memory/context/environment.json
+.opencode/memory/entries/
+
+# Node/npm temporary
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
