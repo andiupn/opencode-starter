@@ -1,0 +1,105 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "code",
+  "instructions": ["AGENTS.md"],
+
+  "agent": {
+    "code": {
+      "description": "Primary agent for writing, editing, and running code across any language",
+      "mode": "primary",
+      "temperature": 0.3,
+      "steps": 50,
+      "color": "primary"
+    },
+    "research": {
+      "description": "Explores and analyzes the codebase to find patterns, files, and architecture",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "color": "#4A90D9",
+      "permission": {
+        "edit": "deny",
+        "bash": { "*": "ask", "git *": "allow", "grep *": "allow", "find *": "allow", "ls *": "allow" },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "debug": {
+      "description": "Diagnoses and fixes errors, runs diagnostics and troubleshooting",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "color": "#E74C3C",
+      "permission": {
+        "edit": "deny",
+        "bash": { "*": "ask", "git *": "allow", "npm *": "allow", "bun *": "allow", "pip *": "allow", "python *": "allow", "cargo *": "allow", "go *": "allow", "ls *": "allow" },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "refactor": {
+      "description": "Cleans up, optimizes, and restructures code for better quality",
+      "mode": "subagent",
+      "temperature": 0.2,
+      "color": "#2ECC71",
+      "permission": {
+        "edit": "allow",
+        "bash": { "*": "ask", "git diff*": "allow", "git status*": "allow", "ls *": "allow" },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "document": {
+      "description": "Creates and maintains documentation without modifying source code",
+      "mode": "subagent",
+      "temperature": 0.3,
+      "color": "#9B59B6",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "webfetch": "allow"
+      }
+    }
+  },
+
+  "command": {
+    "analyze": {
+      "description": "Analyze project structure and provide a summary",
+      "template": "Analyze this project: language, framework, directory structure, dependencies, architecture. Current state:\n!`ls -la`\n!`git log --oneline -5 2>/dev/null || echo \"no git history\"`\nProvide a concise summary.",
+      "agent": "research",
+      "subtask": true
+    },
+    "fix": {
+      "description": "Find and fix issues in the codebase",
+      "template": "Scan the codebase for bugs and errors.\n!`git status --short`\n!`git diff --stat`\nList findings with severity, then fix critical ones.",
+      "agent": "debug",
+      "subtask": true
+    },
+    "explain": {
+      "description": "Explain a specific file, function, or concept",
+      "template": "Explain $ARGUMENTS. Break down: purpose, how it works, key patterns, dependencies, edge cases.",
+      "agent": "research",
+      "subtask": true
+    }
+  },
+
+  "permission": {
+    "read": { "*": "allow", ".env": "deny", ".env.*": "deny", ".env.example": "allow" },
+    "bash": { "*": "ask", "git *": "allow", "ls *": "allow" }
+  },
+
+  "tool_output": { "max_lines": 500, "max_bytes": 102400 },
+
+  "compaction": {
+    "auto": true,
+    "tail_turns": 3
+  },
+
+  "experimental": {
+    "continue_loop_on_deny": true
+  }
+}
