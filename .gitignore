@@ -22,3 +22,40 @@ yarn-error.log*
 # OS-specific files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build output
+dist/
+build/
+out/
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# PHP
+vendor/
+composer.lock
+*.cache
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tgz
